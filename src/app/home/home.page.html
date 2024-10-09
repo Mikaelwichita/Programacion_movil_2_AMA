@@ -10,21 +10,21 @@
         <ion-icon name="mail-outline"></ion-icon>
         <ion-item>
           <ion-label position="floating">EMAIL</ion-label>
-          <ion-input type="email"></ion-input>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
         </ion-item>
       </div>
       <div class="form-input">
         <ion-icon name="lock-closed-outline"></ion-icon>
         <ion-item>
-          <ion-label position="floating">PASSWORD</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-label position="floating">CONTRASEÑA</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
       </div>
     </div>
     <div class="action-buttons ion-padding">
-      <ion-button size="large" class="login-button">Login</ion-button>
-      <p>Forgot password?</p>
-      <ion-button class="signup-button" size="large" fill="outline" routerLink="/signupb">Sing up</ion-button>
+      <ion-button size="large" class="login-button" (click)="login()">Logearse</ion-button>
+      <p>¿Olvidaste la contraseña?</p>
+      <ion-button class="signup-button" size="large" fill="outline" routerLink="/signupb">Registrarse</ion-button>
     </div>
   </div>
 </ion-content>

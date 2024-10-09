@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  email: string = '';
+  password: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     // Esperar 2 segundos antes de mostrar el logo
@@ -26,5 +29,16 @@ export class HomePage implements OnInit {
       }, 1000); // 1000 ms = 1 segundo
 
     }, 2000); // 2000 ms = 2 segundos
+  }
+
+  login() {
+    // Aquí puedes implementar tu lógica de autenticación
+    if (this.email === 'usuario@ejemplo.com' && this.password === 'contraseña') {
+      // Redirige al menú principal
+      this.router.navigate(['/inicio']);
+    } else {
+      // Muestra un mensaje de error (puedes usar un alert, toast, etc.)
+      alert('Credenciales incorrectas. Intenta de nuevo.');
+    }
   }
 }
