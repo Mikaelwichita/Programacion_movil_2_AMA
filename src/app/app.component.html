@@ -2,8 +2,44 @@
   <ion-menu menuId="main-menu" contentId="main">
     <ion-content>
       <div class="menu-header-bg"></div>
-      <div class="header-content"></div>
-
+      <div class="header-content">
+        <img src="/assets/IMG/FOTO_JIMENEZ.png" alt="">
+        <ion-label>
+          <h2>Diego Jimenez</h2>
+          <p>Ingeniero Informático</p>
+        </ion-label>
+      </div>
+      <ion-list>
+        <ion-item routerLink="/inicio">
+          <ion-icon slot="start" name="home"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/solicitar-transporte">
+          <ion-icon slot="start" name="person-circle"></ion-icon>
+          <ion-label>Cuenta</ion-label>
+        </ion-item>
+        <ion-item routerLink="/historial-viajes">
+          <ion-icon slot="start" name="time"></ion-icon>
+          <ion-label>Historial de Viajes</ion-label>
+        </ion-item>
+        <ion-item routerLink="/metodo_pago">
+          <ion-icon slot="start" name="card"></ion-icon>
+          <ion-label>Método de Pago</ion-label>
+        </ion-item>
+        <ion-item routerLink="/ajustes">
+          <ion-icon slot="start" name="settings"></ion-icon>
+          <ion-label>Ajustes</ion-label>
+        </ion-item>
+        <ion-item routerLink="/cerrar-sesion">
+          <ion-icon slot="start" name="log-out"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+      <div class="menu-footer-bg">
+        <div class="footer-content">
+          <img src="/assets/IMG/FUNDACION_DIJEI.png" alt="">
+        </div>
+      </div>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
