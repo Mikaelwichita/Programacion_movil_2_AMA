@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      API METEOROLOGICO
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="navigateTo('inicio')">Inicio</ion-button>
+        <ion-button (click)="navigateTo('cuenta')">Cuenta</ion-button>
+        <ion-button (click)="navigateTo('historial')">Historial de viajes</ion-button>
+        <ion-button (click)="navigateTo('pago')">Método de pago</ion-button>
+        <ion-button (click)="navigateTo('config')">Ajustes</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

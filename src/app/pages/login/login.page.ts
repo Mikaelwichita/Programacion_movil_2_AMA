@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
-export class HomePage implements OnInit {
+export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
 
@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
     // Aquí puedes implementar tu lógica de autenticación
     if (this.email === 'usuario@ejemplo.com' && this.password === 'contraseña') {
       // Redirige al menú principal
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/home']);
     } else {
       // Muestra un mensaje de error (puedes usar un alert, toast, etc.)
       alert('Credenciales incorrectas. Intenta de nuevo.');
