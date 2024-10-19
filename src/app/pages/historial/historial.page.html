@@ -1,13 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>historial</ion-title>
+    <!-- Icono de hamburguesa -->
+    <ion-button slot="start" (click)="menu.toggle()" fill="clear">
+      <ion-icon name="menu" slot="icon-only"></ion-icon> <!-- Icono de hamburguesa -->
+    </ion-button>
+    <ion-title>Historial</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">historial</ion-title>
+      <ion-title size="large">Historial de Viajes</ion-title>
     </ion-toolbar>
   </ion-header>
 </ion-content>

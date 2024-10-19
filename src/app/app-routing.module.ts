@@ -8,23 +8,23 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'cuenta',
-    loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
+    loadChildren: () => import('./pages/cuenta/cuenta.module').then(m => m.CuentaPageModule)
   },
   {
     path: 'historial',
-    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+    loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialPageModule)
   },
   {
     path: 'pago',
-    loadChildren: () => import('./pages/pago/pago.module').then( m => m.PagoPageModule)
+    loadChildren: () => import('./pages/pago/pago.module').then(m => m.PagoPageModule)
   },
   {
     path: 'config',
-    loadChildren: () => import('./pages/config/config.module').then( m => m.ConfigPageModule)
+    loadChildren: () => import('./pages/config/config.module').then(m => m.ConfigPageModule)
   },
   {
     path: '',

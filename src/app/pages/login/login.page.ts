@@ -32,12 +32,12 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    // Aquí puedes implementar tu lógica de autenticación
+    
     if (this.email === 'usuario@ejemplo.com' && this.password === 'contraseña') {
-      // Redirige al menú principal
+      
       this.router.navigate(['/home']);
     } else {
-      // Muestra un mensaje de error (puedes usar un alert, toast, etc.)
+      
       alert('Credenciales incorrectas. Intenta de nuevo.');
     }
   }

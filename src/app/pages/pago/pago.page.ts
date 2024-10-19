@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pago',
   templateUrl: './pago.page.html',
   styleUrls: ['./pago.page.scss'],
 })
-export class PagoPage implements OnInit {
+export class PagoPage {
+  constructor(public menu: MenuController) {}  // Hacer el menu público
 
-  constructor() { }
-
-  ngOnInit() {
+  toggleMenu() {
+    this.menu.toggle();  // Alterna la apertura/cierre del menú
   }
-
 }
