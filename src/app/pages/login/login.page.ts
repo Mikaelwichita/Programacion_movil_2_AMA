@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';  // Importa Storage
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,10 @@ export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private storage: Storage  // Inyecta Storage
+  ) {}
 
   ngOnInit() {
     // Esperar 2 segundos antes de mostrar el logo
@@ -31,13 +35,15 @@ export class LoginPage implements OnInit {
     }, 2000); // 2000 ms = 2 segundos
   }
 
-  login() {
-    
-    if (this.email === 'usuario@ejemplo.com' && this.password === 'contraseña') {
-      
+  async login() {
+    // Obtener los datos almacenados
+    const storedEmail = await this.storage.get('correo');
+    const storedPassword = await this.storage.get('password');
+
+    // Verificar si el correo y la contraseña coinciden
+    if (this.email === storedEmail && this.password === storedPassword) {
       this.router.navigate(['/home']);
     } else {
-      
       alert('Credenciales incorrectas. Intenta de nuevo.');
     }
   }
