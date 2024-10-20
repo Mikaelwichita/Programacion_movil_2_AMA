@@ -1,0 +1,21 @@
+.profile-picture {
+    width: 60%;
+    margin: auto; /* Cambia esto para centrar horizontalmente */
+    display: block; /* Asegúrate de que sea un elemento de bloque */
+    border-radius: 50%;
+    box-shadow: 0px 1px 10px rgba(10, 15, 28, 0.5);
+}
+
+ion-button.action-buttons {
+    display: block; /* Asegúrate de que el botón sea un elemento de bloque */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    color: inherit; /* Hereda el color del texto del contenedor */
+    background-color: #f9b801; /* Color de fondo amarillo */
+}
+
+.form-section {
+    margin-top: 15px; /* Ajusta el valor según sea necesario */
+    
+}
+
+

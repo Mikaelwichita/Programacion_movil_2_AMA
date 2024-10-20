@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="registro-container ion-padding">
+    <div class="profile-picture-container">
+      <img src="/assets/IMG/SIN_FOTO_PERFIL.png" alt="Foto de perfil" class="profile-picture" />
+      <br>
+      <ion-button fill="outline" class="action-buttons">Subir foto de perfil</ion-button>
+    </div>
+
+    <div class="form-section">
+      <ion-item>
+        <ion-label position="floating">Nombre y Apellido <span style="color: red;">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="nombreApellido" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico <span style="color: red;">*</span></ion-label>
+        <ion-input type="email" [(ngModel)]="correo" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Número de Celular <span style="color: red;">*</span></ion-label>
+        <ion-input type="tel" [(ngModel)]="telefono" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Edad <span style="color: red;">*</span></ion-label>
+        <ion-input type="number" [(ngModel)]="edad" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Rol actual <span style="color: red;">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="carrera" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña <span style="color: red;">*</span></ion-label>
+        <ion-input type="password" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+
+      <div class="action-buttons ion-padding">
+        <ion-button fill="outline" class="action-buttons" (click)="registrarse()">Registrarse</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
