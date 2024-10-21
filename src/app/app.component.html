@@ -5,12 +5,12 @@
       <div class="header-content">
         <img src="/assets/IMG/FOTO_JIMENEZ.png" alt="">
         <ion-label>
-          <h2>Diego Jimenez</h2>
-          <p>Ingeniero Informático</p>
+          <h2>{{ nombreUsuario || 'Usuario' }}</h2>
+          <p>{{ carreraUsuario || 'Carrera no asignada' }}</p> 
         </ion-label>
       </div>
       <ion-list>
-        <ion-item routerLink="/home" >
+        <ion-item routerLink="/home">
           <ion-icon slot="start" name="home"></ion-icon>
           <ion-label>Inicio</ion-label>
         </ion-item>
@@ -30,12 +30,10 @@
           <ion-icon slot="start" name="settings"></ion-icon>
           <ion-label>Configuración</ion-label>
         </ion-item>
-
         <ion-item (click)="confirmLogout()">
           <ion-icon slot="start" name="log-out"></ion-icon>
           <ion-label>Cerrar Sesión</ion-label>
-        </ion-item>        
-        
+        </ion-item>
       </ion-list>
       <div class="menu-footer-bg">
         <div class="footer-content">

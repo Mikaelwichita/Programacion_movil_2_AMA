@@ -3,6 +3,16 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';  // Asegúrate de importar Storage
 
+// Define la interfaz para el usuario
+interface Usuario {
+  nombreApellido: string;
+  correo: string;
+  telefono: string;
+  edad: number;
+  carrera: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -22,7 +32,9 @@ export class RegistroPage {
     private storage: Storage  // Inyecta Storage
   ) {}
 
+  // Método para registrar el usuario
   async registrarse() {
+    // Validación de los campos
     if (
       this.nombreApellido !== '' &&
       this.correo !== '' &&
@@ -31,36 +43,50 @@ export class RegistroPage {
       this.carrera !== '' &&
       this.password !== ''
     ) {
-      const correoGuardado = await this.storage.get('correo');
-      
-      if (correoGuardado === this.correo) {
-        // Si el correo ya está registrado, mostramos un mensaje y no continuamos con el registro
-        await this.presentAlert('Usuario ya registrado', 'Este usuario ya está registrado con este correo.');
+      // Verifica si ya existe un usuario con el mismo correo
+      const usuarios: Usuario[] = await this.storage.get('usuarios') || [];
+      const usuarioExistente = usuarios.find(u => u.correo === this.correo);
+
+      if (usuarioExistente) {
+        // Si el correo ya está registrado, mostramos un mensaje
+        await this.presentAlert('Usuario ya registrado', 'Este correo ya está registrado.');
         return;
       }
-      
-      // Llamamos al método guardarDatos para guardar los datos
-      await this.guardarDatos();
 
+      // Si no existe, guarda el nuevo usuario
+      await this.guardarDatos(usuarios);
+      
+      // Alerta de éxito
       await this.presentAlert('Registro Exitoso', 'Tus datos han sido registrados correctamente.');
       
-      // Redirigimos al usuario a la página de login
+      // Redirige al usuario a la página de login
       this.router.navigate(['/login']);
     } else {
+      // Si falta algún campo, muestra un mensaje de error
       await this.presentAlert('Error', 'Por favor, completa todos los campos.');
     }
   }
 
   // Método para guardar los datos en Storage
-  async guardarDatos() {
-    await this.storage.set('nombreApellido', this.nombreApellido);
-    await this.storage.set('correo', this.correo);
-    await this.storage.set('telefono', this.telefono);
-    await this.storage.set('edad', this.edad);
-    await this.storage.set('carrera', this.carrera);
-    await this.storage.set('password', this.password);
+  async guardarDatos(usuarios: Usuario[]) {
+    const usuario: Usuario = {
+      nombreApellido: this.nombreApellido,
+      correo: this.correo,
+      telefono: this.telefono,
+      edad: this.edad,
+      carrera: this.carrera,
+      password: this.password,
+    };
+
+    // Guarda el nuevo usuario en el array y almacénalo en Storage
+    usuarios.push(usuario);
+    await this.storage.set('usuarios', usuarios);
+
+    // También almacenamos el usuario actual en 'usuarioSesion'
+    await this.storage.set('usuarioSesion', usuario);  // Guarda el usuario que acaba de registrarse
   }
 
+  // Método para mostrar alertas
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

@@ -36,15 +36,29 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    // Obtener los datos almacenados
-    const storedEmail = await this.storage.get('correo');
-    const storedPassword = await this.storage.get('password');
-
-    // Verificar si el correo y la contraseña coinciden
-    if (this.email === storedEmail && this.password === storedPassword) {
-      this.router.navigate(['/home']);
+    // Obtener el array de usuarios almacenado
+    const usuarios: any[] = await this.storage.get('usuarios') || [];
+  
+    // Buscar el usuario que coincida con el correo ingresado
+    const usuarioEncontrado = usuarios.find(u => u.correo === this.email);
+  
+    if (usuarioEncontrado) {
+      // Verificar si la contraseña coincide
+      if (usuarioEncontrado.password === this.password) {
+        // Guardar los datos del usuario en Storage para la sesión, incluyendo la carrera
+        await this.storage.set('usuarioSesion', {
+          nombreApellido: usuarioEncontrado.nombreApellido,
+          carrera: usuarioEncontrado.carrera,  // Almacenar la carrera del usuario
+        });
+  
+        // Redirige a la página de inicio
+        this.router.navigate(['/home']);
+      } else {
+        alert('Contraseña incorrecta. Intenta de nuevo.');
+      }
     } else {
-      alert('Credenciales incorrectas. Intenta de nuevo.');
+      alert('Usuario no encontrado. Intenta de nuevo.');
     }
   }
+  
 }

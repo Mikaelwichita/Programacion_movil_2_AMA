@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController, AlertController } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -9,12 +9,15 @@ import { Storage } from '@ionic/storage-angular';  // Importamos Storage
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  nombreUsuario: string = '';
+  carreraUsuario: string = '';  // Cambiamos de rolUsuario a carreraUsuario
+
   constructor(
     private menu: MenuController,
     private router: Router,
-    private alertController: AlertController,  // Importamos AlertController
-    private storage: Storage                   // Inyectamos Storage
+    private alertController: AlertController,
+    private storage: Storage  // Inyectamos Storage
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -29,6 +32,19 @@ export class AppComponent {
   // Método para inicializar el Storage
   async initStorage() {
     await this.storage.create();
+  }
+
+  async ngOnInit() {
+    await this.loadUserData();  // Cargar los datos del usuario al iniciar la app
+  }
+
+  async loadUserData() {
+    const usuarioSesion = await this.storage.get('usuarioSesion');  // Recupera el usuario actual desde Storage
+    
+    if (usuarioSesion) {
+      this.nombreUsuario = usuarioSesion.nombreApellido;  // Asigna el nombre
+      this.carreraUsuario = usuarioSesion.carrera || 'Carrera no asignada';  // Asigna la carrera del usuario
+    }
   }
 
   // Método para mostrar la alerta de confirmación de cierre de sesión
@@ -57,9 +73,14 @@ export class AppComponent {
   }
 
   // Método para cerrar sesión y redirigir a la página de login
-  logout() {
-    // Aquí puedes limpiar cualquier dato de sesión o storage si es necesario
-    this.router.navigate(['/login']);  // Redirige al login
+  async logout() {
+    // Eliminar los datos del usuario de la sesión
+    await this.storage.remove('usuarioSesion');
+    this.nombreUsuario = '';  // Borra el nombre del usuario
+    this.carreraUsuario = '';  // Borra la carrera del usuario
+
+    // Redirige al login
+    this.router.navigate(['/login']);
     this.menu.close();  // Cierra el menú si está abierto
   }
 }
