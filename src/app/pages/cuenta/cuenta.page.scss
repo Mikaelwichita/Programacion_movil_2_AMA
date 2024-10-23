@@ -1,0 +1,29 @@
+.cuenta-container {
+    text-align: center;
+  }
+  
+  .profile-picture-container {
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .action-buttons {
+    margin-top: 10px;
+    --background: #f9b801;
+    color: black;
+    border-color: #f9b801;
+
+  }
+  
+  .confirm-button{
+    --background: #f9b801;
+    --border-radius: 20px;
+    color: black;
+  }
+  
