@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      API METEOROLOGICO
+      API METEOROLÓGICO
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -21,4 +21,26 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <ion-searchbar 
+    [(ngModel)]="city" 
+    (ionInput)="getWeather()" 
+    placeholder="Buscar ciudad">
+  </ion-searchbar>
+
+  <div *ngIf="weatherData" class="weather-info">
+    <h2>Clima en {{ weatherData.name }}</h2>
+    <p><strong>Temperatura:</strong> {{ weatherData.main.temp }} °C</p>
+    <p><strong>Descripción:</strong> {{ weatherData.weather[0].description | titlecase }}</p>
+    <p><strong>Humedad:</strong> {{ weatherData.main.humidity }}%</p>
+    <p><strong>Viento:</strong> {{ weatherData.wind.speed }} m/s</p>
+    <img 
+      *ngIf="weatherData.weather.length > 0" 
+      [src]="'http://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'" 
+      alt="Icono del clima">
+  </div>
+
+  <div *ngIf="!weatherData">
+    <p>No se encontraron datos del clima. Intenta buscar una ciudad válida.</p>
+  </div>
 </ion-content>
