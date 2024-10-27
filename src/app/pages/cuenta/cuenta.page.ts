@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';  // Importa MenuController
+import { MenuController } from '@ionic/angular';  
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';  // Importa Storage
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-cuenta',
@@ -16,12 +16,13 @@ export class CuentaPage implements OnInit {
   edad: number = 18;
   carrera: string = '';
   password: string = ''; // Mantener el campo de contraseña
+  fotoPerfil: string | null = null; // Añadido para almacenar la foto de perfil
 
   constructor(
     private alertController: AlertController,
     private router: Router,
     private storage: Storage,
-    public menu: MenuController  // Inyecta el MenuController correctamente
+    public menu: MenuController  
   ) {}
 
   async ngOnInit() {
@@ -38,11 +39,24 @@ export class CuentaPage implements OnInit {
       this.telefono = usuarioSesion.telefono || '';
       this.edad = usuarioSesion.edad || 18;
       this.carrera = usuarioSesion.carrera || '';
-      this.password = usuarioSesion.password || ''; // Cargar la contraseña
+      this.password = usuarioSesion.password || ''; 
+      this.fotoPerfil = usuarioSesion.fotoPerfil || null; // Cargar la foto de perfil
     }
   }
 
-  // Método para confirmar los cambios
+  // Método para manejar la selección de archivos
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.fotoPerfil = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   async confirmarCambios() {
     const alert = await this.alertController.create({
       header: 'Confirmación',
@@ -80,6 +94,10 @@ export class CuentaPage implements OnInit {
               if (this.password) {
                 usuarios[usuarioIndex].password = this.password;
               }
+              // Actualizar foto de perfil
+              if (this.fotoPerfil) {
+                usuarios[usuarioIndex].fotoPerfil = this.fotoPerfil;
+              }
   
               // Guardar los cambios en el Storage
               await this.storage.set('usuarios', usuarios);
@@ -103,8 +121,6 @@ export class CuentaPage implements OnInit {
     await alert.present();
   }
   
-
-  // Método para mostrar alertas
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

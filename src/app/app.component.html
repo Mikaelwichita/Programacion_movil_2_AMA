@@ -3,7 +3,7 @@
     <ion-content>
       <div class="menu-header-bg"></div>
       <div class="header-content">
-        <img src="/assets/IMG/FOTO_JIMENEZ.png" alt="">
+        <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" />
         <ion-label>
           <h2>{{ nombreUsuario || 'Usuario' }}</h2>
           <p>{{ carreraUsuario || 'Carrera no asignada' }}</p> 

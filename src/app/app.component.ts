@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage-angular';  // Importamos Storage
 export class AppComponent implements OnInit {
   nombreUsuario: string = '';
   carreraUsuario: string = '';  // Cambiamos de rolUsuario a carreraUsuario
+  fotoPerfil: string | null = null; // Añadido para almacenar la foto de perfil
 
   constructor(
     private menu: MenuController,
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
     if (usuarioSesion) {
       this.nombreUsuario = usuarioSesion.nombreApellido;  // Asigna el nombre
       this.carreraUsuario = usuarioSesion.carrera || 'Carrera no asignada';  // Asigna la carrera del usuario
+      this.fotoPerfil = usuarioSesion.fotoPerfil || null;  // Carga la foto de perfil
     }
   }
 
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
     await this.storage.remove('usuarioSesion');
     this.nombreUsuario = '';  // Borra el nombre del usuario
     this.carreraUsuario = '';  // Borra la carrera del usuario
+    this.fotoPerfil = null; // Borra la foto de perfil
 
     // Redirige al login
     this.router.navigate(['/login']);

@@ -1,21 +1,43 @@
-.profile-picture {
-    width: 60%;
-    margin: auto; /* Cambia esto para centrar horizontalmente */
-    display: block; /* Asegúrate de que sea un elemento de bloque */
-    border-radius: 50%;
-    box-shadow: 0px 1px 10px rgba(10, 15, 28, 0.5);
-}
+.bienvenida-container {
+    background-color: #f9b801;  
+    border-radius: 12px;         
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+    padding: 20px;               
+    text-align: center;          
+    margin: 20px;                
+    border-color: black;
+  }
+  
+  .bienvenida-container h1 {
+    font-size: 24px;  
+    margin: 0;       
+  }
+  
+  .bienvenida-container p {
+    font-size: 16px;
+    margin-top: 10px; 
+  }
+  
+
 
 ion-button.action-buttons {
-    display: block; /* Asegúrate de que el botón sea un elemento de bloque */
-    margin: 0 auto; /* Centra el botón horizontalmente */
-    color: inherit; /* Hereda el color del texto del contenedor */
+    display: block; 
+    margin: 0 auto;
+    color: inherit; 
     background-color: #f9b801; /* Color de fondo amarillo */
 }
 
 .form-section {
-    margin-top: 15px; /* Ajusta el valor según sea necesario */
+    margin-top: 15px; 
     
 }
+
+ion-item {
+    --background: #f0f0f0; /* Color de fondo para el ion-item */
+    border-radius: 12px; 
+    margin-bottom: 10px; 
+  }
+  
+  
 
 

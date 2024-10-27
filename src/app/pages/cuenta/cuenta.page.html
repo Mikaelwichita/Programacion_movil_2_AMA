@@ -10,9 +10,10 @@
 <ion-content>
   <div class="cuenta-container ion-padding">
     <div class="profile-picture-container">
-      <img src="/assets/IMG/SIN_FOTO_PERFIL.png" alt="Foto de perfil" class="profile-picture" />
+      <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" class="profile-picture" />
       <br>
-      <ion-button fill="outline" class="action-buttons">Cambiar foto de perfil</ion-button>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden #fileInput />
+      <ion-button fill="outline" class="action-buttons" (click)="fileInput.click()">Cambiar foto de perfil</ion-button>
     </div>
     <div class="form-section">
       <ion-item>

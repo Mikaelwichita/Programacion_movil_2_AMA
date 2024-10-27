@@ -75,6 +75,11 @@ ion-content {
           --padding-top: 36px; 
           color: #7b7b7b;
         }
+
+        ion-item {
+          --background: #f0f0f0; 
+          border-radius: 12px; 
+        }
       }
     }
     .action-buttons{
