@@ -26,4 +26,10 @@
     --border-radius: 20px;
     color: black;
   }
+
+  ion-item {
+    --background: #f0f0f0; /* Color de fondo para el ion-item */
+    border-radius: 12px; 
+    margin-bottom: 10px; 
+  }
   
