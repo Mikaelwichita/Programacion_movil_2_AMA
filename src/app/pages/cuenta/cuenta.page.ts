@@ -44,7 +44,6 @@ export class CuentaPage implements OnInit {
 
   // Método para confirmar los cambios
   async confirmarCambios() {
-    // Mostrar alerta de confirmación
     const alert = await this.alertController.create({
       header: 'Confirmación',
       message: '¿Seguro quieres hacer los cambios?',
@@ -59,54 +58,51 @@ export class CuentaPage implements OnInit {
         {
           text: 'Sí',
           handler: async () => {
-            // Validar que todos los campos estén completos, excepto el correo
-            if (
-              this.nombreApellido !== '' &&
-              this.telefono !== '' &&
-              this.edad > 0 &&
-              this.carrera !== '' &&
-              this.password !== '' // Mantener la validación de la contraseña
-            ) {
-              // Cargar todos los usuarios
-              const usuarios: any[] = await this.storage.get('usuarios') || [];
-
-              // Buscar al usuario actual en la lista
-              const usuarioIndex = usuarios.findIndex(u => u.correo === this.correo);
-              if (usuarioIndex > -1) {
-                // Actualizar los datos del usuario
-                usuarios[usuarioIndex] = {
-                  nombreApellido: this.nombreApellido,
-                  correo: this.correo,
-                  telefono: this.telefono,
-                  edad: this.edad,
-                  carrera: this.carrera,
-                  password: this.password // Mantener la contraseña
-                };
-
-                // Guardar los cambios en el Storage
-                await this.storage.set('usuarios', usuarios);
-
-                // Actualizar el usuario de la sesión actual
-                await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
-
-                // Alerta de éxito
-                await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
-
-                // Redirigir a la página principal o recargar datos
-                this.router.navigate(['/home']);
-              } else {
-                await this.presentAlert('Error', 'No se encontró el usuario.');
+            // Obtener los usuarios guardados
+            const usuarios: any[] = await this.storage.get('usuarios') || [];
+  
+            // Buscar al usuario actual en la lista
+            const usuarioIndex = usuarios.findIndex(u => u.correo === this.correo);
+            if (usuarioIndex > -1) {
+              // Actualizar solo los campos que tienen valor
+              if (this.nombreApellido) {
+                usuarios[usuarioIndex].nombreApellido = this.nombreApellido;
               }
+              if (this.telefono) {
+                usuarios[usuarioIndex].telefono = this.telefono;
+              }
+              if (this.edad) {
+                usuarios[usuarioIndex].edad = this.edad;
+              }
+              if (this.carrera) {
+                usuarios[usuarioIndex].carrera = this.carrera;
+              }
+              if (this.password) {
+                usuarios[usuarioIndex].password = this.password;
+              }
+  
+              // Guardar los cambios en el Storage
+              await this.storage.set('usuarios', usuarios);
+  
+              // Actualizar el usuario de la sesión actual
+              await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
+  
+              // Alerta de éxito
+              await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
+  
+              // Redirigir a la página principal o recargar datos
+              this.router.navigate(['/home']);
             } else {
-              await this.presentAlert('Error', 'Por favor, completa todos los campos.');
+              await this.presentAlert('Error', 'No se encontró el usuario.');
             }
           }
         }
       ]
     });
-
+  
     await alert.present();
   }
+  
 
   // Método para mostrar alertas
   async presentAlert(header: string, message: string) {
