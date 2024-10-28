@@ -1,7 +1,7 @@
-<ion-header class="ion-header custom-header" [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Home
+      Home 
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -21,13 +21,12 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
+  <p style="text-align: center;">Escribe la comuna en donde te encuentras para saber el clima actual</p>
   <ion-searchbar 
     [(ngModel)]="city" 
     (ionInput)="getWeather()" 
     placeholder="Buscar ciudad">
   </ion-searchbar>
-
   <div *ngIf="weatherData" class="weather-info">
     <h2>Clima en {{ weatherData.name }}</h2>
     <p><strong>Temperatura:</strong> {{ weatherData.main.temp }} °C</p>
