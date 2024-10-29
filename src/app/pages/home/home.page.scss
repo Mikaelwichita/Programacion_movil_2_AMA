@@ -32,5 +32,59 @@
     border-color: black;
   }
 
+
+.trip-card {
+  border: 2px solid black; 
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  padding: 16px; 
+}
+
+
+.trip-card ion-item {
+  --background: #f0f0f0; 
+  border: 1px solid black; 
+  border-radius: 8px; 
+  margin-bottom: 12px; 
+}
+
+
+.start-trip-button {
+  --background: #ffd700; 
+  --color: black; 
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 12px; 
+}
+
+
+ion-item {
+  --background: transparent; 
+  --inner-padding-end: 0; 
+}
+
+ion-label {
+  margin-top: 12px; 
+  margin-bottom: 4px; 
+  font-size: 1rem; 
+  color: #333; 
+}
+
+ion-input,
+ion-select {
+  --padding-top: 12px; 
+  --padding-bottom: 12px;
+  background-color: #f2f2f2; 
+  border-radius: 5px; 
+  margin-top: 8px; 
+}
+
+
+.input-field {
+  margin-bottom: 12px; 
+}
+
+
+
   
   

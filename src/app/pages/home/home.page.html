@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home 
-    </ion-title>
+    <ion-title>Home</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -21,25 +19,61 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
   <p style="text-align: center;">Escribe la comuna en donde te encuentras para saber el clima actual</p>
-  <ion-searchbar 
-    [(ngModel)]="city" 
-    (ionInput)="getWeather()" 
-    placeholder="Buscar ciudad">
-  </ion-searchbar>
+  <ion-searchbar [(ngModel)]="city" (ionInput)="getWeather()" placeholder="Buscar ciudad"></ion-searchbar>
   <div *ngIf="weatherData" class="weather-info">
     <h2>Clima en {{ weatherData.name }}</h2>
     <p><strong>Temperatura:</strong> {{ weatherData.main.temp }} °C</p>
     <p><strong>Descripción:</strong> {{ weatherData.weather[0].description | titlecase }}</p>
     <p><strong>Humedad:</strong> {{ weatherData.main.humidity }}%</p>
     <p><strong>Viento:</strong> {{ weatherData.wind.speed }} m/s</p>
-    <img 
-      *ngIf="weatherData.weather.length > 0" 
-      [src]="'http://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'" 
-      alt="Icono del clima">
+    <img *ngIf="weatherData.weather.length > 0" 
+         [src]="'http://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'" 
+         alt="Icono del clima">
   </div>
 
   <div *ngIf="!weatherData">
     <p>No se encontraron datos del clima. Intenta buscar una ciudad válida.</p>
   </div>
-</ion-content>
+<!-- Sección de Iniciar Viaje -->
+<ion-card class="trip-card">
+  <ion-card-header>
+    <ion-card-title>Iniciar Viaje</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="stacked">Rol</ion-label>
+      <ion-select [(ngModel)]="role" (ionChange)="onRoleChange()">
+        <ion-select-option value="pasajero">Pasajero</ion-select-option>
+        <ion-select-option value="conductor">Conductor</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="role === 'conductor'">
+      <ion-label position="stacked">Capacidad de Pasajeros</ion-label>
+      <ion-input type="number" [(ngModel)]="passengerCapacity" class="input-field"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Punto de Partida</ion-label>
+      <ion-input placeholder="Ingrese dirección de inicio" [(ngModel)]="startPoint" class="input-field"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Punto Final</ion-label>
+      <ion-input placeholder="Ingrese dirección final" [(ngModel)]="endPoint" class="input-field"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Precio Estimado</ion-label>
+      <ion-input [value]="tripCost | currency:'CLP':'symbol':'1.0-0'" readonly class="input-field"></ion-input>
+    </ion-item>
+    
+
+    <ion-button expand="block" (click)="startTrip()" class="start-trip-button">Iniciar Viaje</ion-button>
+  </ion-card-content>
+</ion-card>
+
+
