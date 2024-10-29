@@ -35,3 +35,34 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Añadir al inicio del archivo global.scss */
+
+/* global.scss */
+
+/* Tamaño de fuente global */
+:root {
+    --font-size: 1em; /* Tamaño por defecto */
+  }
+  
+  /* Aplicar tamaño de fuente global */
+  body {
+    font-size: var(--font-size);
+  }
+  
+  /* Modo de colores para daltónicos */
+  .daltonic-mode {
+    --ion-color-primary: #4f4f4f;
+    --ion-color-secondary: #bada55;
+    --ion-color-tertiary: #ff6347;
+    /* Agrega otros colores personalizados aquí */
+  }
+  
+  /* Modo oscuro */
+  .dark-mode {
+    --ion-background-color: #121212;
+    --ion-text-color: #ffffff;
+    /* Otros colores oscuros que prefieras */
+  }
+  
+  
