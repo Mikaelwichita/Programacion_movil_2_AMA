@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    private storage: Storage  // Inyecta Storage
+    private storage: Storage  
   ) {}
 
   ngOnInit() {
@@ -21,14 +21,14 @@ export class LoginPage implements OnInit {
     setTimeout(() => {
       const logo = document.querySelector('.logo') as HTMLElement;
       if (logo) {
-        logo.style.opacity = '1'; // Cambia la opacidad del logo a 1 para hacerlo visible
+        logo.style.opacity = '1'; // Cambia la opacidad del logo 
       }
 
-      // Esperar 1 segundo más y luego mostrar la sección de login
+      // Esperar 1 segundo más y luego mostrar la seccion de login
       setTimeout(() => {
         const loginSection = document.querySelector('.login-section');
         if (loginSection) {
-          loginSection.classList.add('show'); // Agregar clase para mostrar el formulario
+          loginSection.classList.add('show'); 
         }
       }, 1000); // 1000 ms = 1 segundo
 
@@ -39,23 +39,23 @@ export class LoginPage implements OnInit {
     // Obtener el array de usuarios almacenado
     const usuarios: any[] = await this.storage.get('usuarios') || [];
 
-    // Buscar el usuario que coincida con el correo ingresado (normaliza el correo)
+    // Buscar el usuario que coincida con el correo ingresado 
     const usuarioEncontrado = usuarios.find(u => u.correo.trim().toLowerCase() === this.email.trim().toLowerCase());
 
     if (usuarioEncontrado) {
-      // Verificar si la contraseña coincide
+
       if (usuarioEncontrado.password === this.password) {
-        // Guardar todos los datos del usuario en Storage para la sesión
+        // Guardar todos los datos del usuario 
         await this.storage.set('usuarioSesion', {
           nombreApellido: usuarioEncontrado.nombreApellido,
-          correo: usuarioEncontrado.correo,        // Asegúrate de guardar el correo
-          telefono: usuarioEncontrado.telefono,    // Guarda el teléfono
-          edad: usuarioEncontrado.edad,            // Guarda la edad
-          carrera: usuarioEncontrado.carrera,      // Almacenar la carrera del usuario
-          password: usuarioEncontrado.password     // Guarda la contraseña
+          correo: usuarioEncontrado.correo,        
+          telefono: usuarioEncontrado.telefono,    
+          edad: usuarioEncontrado.edad,           
+          carrera: usuarioEncontrado.carrera,      
+          password: usuarioEncontrado.password     
         });
 
-        // Redirige a la página de inicio
+        // Redirige a la pagina de inicio
         this.router.navigate(['/home']);
       } else {
         alert('Contraseña incorrecta. Intenta de nuevo.');

@@ -29,10 +29,10 @@ export class RegistroPage {
   constructor(
     private alertController: AlertController, 
     private router: Router,
-    private storage: Storage  // Inyecta Storage
+    private storage: Storage  
   ) {}
 
-  // Método para registrar el usuario
+  
   async registrarse() {
     // Validación de los campos
     if (
@@ -53,10 +53,10 @@ export class RegistroPage {
         return;
       }
 
-      // Si no existe, guarda el nuevo usuario
+      
       await this.guardarDatos(usuarios);
       
-      // Alerta de éxito
+
       await this.presentAlert('Registro Exitoso', 'Tus datos han sido registrados correctamente.');
       
       // Redirige al usuario a la página de login
@@ -78,15 +78,15 @@ export class RegistroPage {
       password: this.password,
     };
 
-    // Guarda el nuevo usuario en el array y almacénalo en Storage
+    // Guarda el nuevo usuario en el array 
     usuarios.push(usuario);
     await this.storage.set('usuarios', usuarios);
 
-    // También almacenamos el usuario actual en 'usuarioSesion'
+    
     await this.storage.set('usuarioSesion', usuario);  // Guarda el usuario que acaba de registrarse
   }
 
-  // Método para mostrar alertas
+  
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

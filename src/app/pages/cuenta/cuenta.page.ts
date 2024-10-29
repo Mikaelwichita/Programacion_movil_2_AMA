@@ -11,12 +11,12 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class CuentaPage implements OnInit {
   nombreApellido: string = '';
-  correo: string = ''; // Se puede dejar vacío, ya no es obligatorio
+  correo: string = ''; 
   telefono: string = '';
   edad: number = 18;
   carrera: string = '';
-  password: string = ''; // Mantener el campo de contraseña
-  fotoPerfil: string | null = null; // Añadido para almacenar la foto de perfil
+  password: string = ''; 
+  fotoPerfil: string | null = null; 
 
   constructor(
     private alertController: AlertController,
@@ -40,11 +40,11 @@ export class CuentaPage implements OnInit {
       this.edad = usuarioSesion.edad || 18;
       this.carrera = usuarioSesion.carrera || '';
       this.password = usuarioSesion.password || ''; 
-      this.fotoPerfil = usuarioSesion.fotoPerfil || null; // Cargar la foto de perfil
+      this.fotoPerfil = usuarioSesion.fotoPerfil || null; 
     }
   }
 
-  // Método para manejar la selección de archivos
+  // Metodo para manejar la selección de archivos
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -102,10 +102,10 @@ export class CuentaPage implements OnInit {
               // Guardar los cambios en el Storage
               await this.storage.set('usuarios', usuarios);
   
-              // Actualizar el usuario de la sesión actual
+              // Actualizar el usuario de la sesion actual
               await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
   
-              // Alerta de éxito
+              // Alerta de exito
               await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
   
               // Redirigir a la página principal o recargar datos

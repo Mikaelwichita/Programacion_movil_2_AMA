@@ -7,9 +7,9 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./historial.page.scss'],
 })
 export class HistorialPage {
-  constructor(public menu: MenuController) {}  // Hacer el menu público
+  constructor(public menu: MenuController) {}  
 
   toggleMenu() {
-    this.menu.toggle();  // Alterna la apertura/cierre del menú
+    this.menu.toggle();  
   }
 }
