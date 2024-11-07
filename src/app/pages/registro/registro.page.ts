@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';  // Asegúrate de importar Storage
+import { Storage } from '@ionic/storage-angular';
 
-// Define la interfaz para el usuario
 interface Usuario {
   nombreApellido: string;
   correo: string;
@@ -32,9 +31,7 @@ export class RegistroPage {
     private storage: Storage  
   ) {}
 
-  
   async registrarse() {
-    // Validación de los campos
     if (
       this.nombreApellido !== '' &&
       this.correo !== '' &&
@@ -43,31 +40,27 @@ export class RegistroPage {
       this.carrera !== '' &&
       this.password !== ''
     ) {
-      // Verifica si ya existe un usuario con el mismo correo
       const usuarios: Usuario[] = await this.storage.get('usuarios') || [];
       const usuarioExistente = usuarios.find(u => u.correo === this.correo);
 
       if (usuarioExistente) {
-        // Si el correo ya está registrado, mostramos un mensaje
         await this.presentAlert('Usuario ya registrado', 'Este correo ya está registrado.');
         return;
       }
 
-      
       await this.guardarDatos(usuarios);
-      
 
-      await this.presentAlert('Registro Exitoso', 'Tus datos han sido registrados correctamente.');
-      
-      // Redirige al usuario a la página de login
+      await this.presentAlert(
+        '¡Bienvenido!',
+        `Hola, ${this.nombreApellido}. Te has registrado exitosamente en nuestra app. ¡Esperamos que disfrutes la experiencia!`
+      );
+
       this.router.navigate(['/login']);
     } else {
-      // Si falta algún campo, muestra un mensaje de error
       await this.presentAlert('Error', 'Por favor, completa todos los campos.');
     }
   }
 
-  // Método para guardar los datos en Storage
   async guardarDatos(usuarios: Usuario[]) {
     const usuario: Usuario = {
       nombreApellido: this.nombreApellido,
@@ -78,15 +71,12 @@ export class RegistroPage {
       password: this.password,
     };
 
-    // Guarda el nuevo usuario en el array 
     usuarios.push(usuario);
     await this.storage.set('usuarios', usuarios);
 
-    
-    await this.storage.set('usuarioSesion', usuario);  // Guarda el usuario que acaba de registrarse
+    await this.storage.set('usuarioSesion', usuario);
   }
 
-  
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

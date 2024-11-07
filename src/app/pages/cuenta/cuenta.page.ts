@@ -16,7 +16,10 @@ export class CuentaPage implements OnInit {
   edad: number = 18;
   carrera: string = '';
   password: string = ''; 
-  fotoPerfil: string | null = null; 
+  fotoPerfil: string | null = null;
+
+  // Variables para almacenar datos originales
+  originalData: any = {};
 
   constructor(
     private alertController: AlertController,
@@ -26,11 +29,9 @@ export class CuentaPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // Cargar datos del usuario al iniciar la página
     await this.loadUserData();
   }
 
-  // Método para cargar los datos del usuario actual
   async loadUserData() {
     const usuarioSesion = await this.storage.get('usuarioSesion');
     if (usuarioSesion) {
@@ -40,11 +41,13 @@ export class CuentaPage implements OnInit {
       this.edad = usuarioSesion.edad || 18;
       this.carrera = usuarioSesion.carrera || '';
       this.password = usuarioSesion.password || ''; 
-      this.fotoPerfil = usuarioSesion.fotoPerfil || null; 
+      this.fotoPerfil = usuarioSesion.fotoPerfil || null;
+
+      // Guardamos los datos originales para detectar cambios
+      this.originalData = { ...usuarioSesion };
     }
   }
 
-  // Metodo para manejar la selección de archivos
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -58,69 +61,67 @@ export class CuentaPage implements OnInit {
   }
 
   async confirmarCambios() {
-    const alert = await this.alertController.create({
-      header: 'Confirmación',
-      message: '¿Seguro quieres hacer los cambios?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cambios cancelados');
-          }
-        },
-        {
-          text: 'Sí',
-          handler: async () => {
-            // Obtener los usuarios guardados
-            const usuarios: any[] = await this.storage.get('usuarios') || [];
-  
-            // Buscar al usuario actual en la lista
-            const usuarioIndex = usuarios.findIndex(u => u.correo === this.correo);
-            if (usuarioIndex > -1) {
-              // Actualizar solo los campos que tienen valor
-              if (this.nombreApellido) {
-                usuarios[usuarioIndex].nombreApellido = this.nombreApellido;
+    const changedFields: string[] = this.detectChanges();
+
+    if (changedFields.length > 0) {
+      const alertMessage = `Has hecho cambios en los siguientes campos: ${changedFields.join(', ')}`;
+
+      const alert = await this.alertController.create({
+        header: 'Confirmación de Cambios',
+        message: alertMessage,
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cambios cancelados');
+            }
+          },
+          {
+            text: 'Guardar',
+            handler: async () => {
+              const usuarios: any[] = await this.storage.get('usuarios') || [];
+              const usuarioIndex = usuarios.findIndex(u => u.correo === this.correo);
+              if (usuarioIndex > -1) {
+                if (this.nombreApellido) usuarios[usuarioIndex].nombreApellido = this.nombreApellido;
+                if (this.telefono) usuarios[usuarioIndex].telefono = this.telefono;
+                if (this.edad) usuarios[usuarioIndex].edad = this.edad;
+                if (this.carrera) usuarios[usuarioIndex].carrera = this.carrera;
+                if (this.password) usuarios[usuarioIndex].password = this.password;
+                if (this.fotoPerfil) usuarios[usuarioIndex].fotoPerfil = this.fotoPerfil;
+
+                await this.storage.set('usuarios', usuarios);
+                await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
+
+                await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
+                this.router.navigate(['/home']);
+              } else {
+                await this.presentAlert('Error', 'No se encontró el usuario.');
               }
-              if (this.telefono) {
-                usuarios[usuarioIndex].telefono = this.telefono;
-              }
-              if (this.edad) {
-                usuarios[usuarioIndex].edad = this.edad;
-              }
-              if (this.carrera) {
-                usuarios[usuarioIndex].carrera = this.carrera;
-              }
-              if (this.password) {
-                usuarios[usuarioIndex].password = this.password;
-              }
-              // Actualizar foto de perfil
-              if (this.fotoPerfil) {
-                usuarios[usuarioIndex].fotoPerfil = this.fotoPerfil;
-              }
-  
-              // Guardar los cambios en el Storage
-              await this.storage.set('usuarios', usuarios);
-  
-              // Actualizar el usuario de la sesion actual
-              await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
-  
-              // Alerta de exito
-              await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
-  
-              // Redirigir a la página principal o recargar datos
-              this.router.navigate(['/home']);
-            } else {
-              await this.presentAlert('Error', 'No se encontró el usuario.');
             }
           }
-        }
-      ]
-    });
-  
-    await alert.present();
+        ]
+      });
+
+      await alert.present();
+    } else {
+      await this.presentAlert('Sin Cambios', 'No has realizado ningún cambio.');
+    }
   }
-  
+
+  detectChanges(): string[] {
+    const changedFields: string[] = [];
+
+    if (this.nombreApellido !== this.originalData.nombreApellido) changedFields.push('Nombre y Apellido');
+    if (this.telefono !== this.originalData.telefono) changedFields.push('Teléfono');
+    if (this.edad !== this.originalData.edad) changedFields.push('Edad');
+    if (this.carrera !== this.originalData.carrera) changedFields.push('Carrera');
+    if (this.password !== this.originalData.password) changedFields.push('Contraseña');
+    if (this.fotoPerfil !== this.originalData.fotoPerfil) changedFields.push('Foto de Perfil');
+
+    return changedFields;
+  }
+
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
