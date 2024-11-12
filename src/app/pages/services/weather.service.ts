@@ -25,4 +25,21 @@ export class WeatherService {
       throw error;
     }
   }
+
+  async getWeatherByCoordinates(lat: number, lon: number) {
+    try {
+      const response = await axios.get(this.apiUrl, {
+        params: {
+          lat: lat,
+          lon: lon,
+          appid: this.apiKey,
+          units: 'metric'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener el clima por coordenadas:', error);
+      throw error;
+    }
+  }
 }

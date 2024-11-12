@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';  // Importa LoadingController
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 
@@ -28,7 +28,8 @@ export class RegistroPage {
   constructor(
     private alertController: AlertController, 
     private router: Router,
-    private storage: Storage  
+    private storage: Storage,
+    private loadingController: LoadingController  // Inyecta LoadingController
   ) {}
 
   async registrarse() {
@@ -40,15 +41,23 @@ export class RegistroPage {
       this.carrera !== '' &&
       this.password !== ''
     ) {
+      const loading = await this.loadingController.create({
+        message: 'Registrando usuario...',
+        spinner: 'crescent',
+      });
+      await loading.present();
+
       const usuarios: Usuario[] = await this.storage.get('usuarios') || [];
       const usuarioExistente = usuarios.find(u => u.correo === this.correo);
 
       if (usuarioExistente) {
+        await loading.dismiss();
         await this.presentAlert('Usuario ya registrado', 'Este correo ya está registrado.');
         return;
       }
 
       await this.guardarDatos(usuarios);
+      await loading.dismiss();
 
       await this.presentAlert(
         '¡Bienvenido!',
@@ -73,7 +82,6 @@ export class RegistroPage {
 
     usuarios.push(usuario);
     await this.storage.set('usuarios', usuarios);
-
     await this.storage.set('usuarioSesion', usuario);
   }
 

@@ -65,4 +65,7 @@
     /* Otros colores oscuros que prefieras */
   }
   
-  
+  .custom-loading {
+    --background: rgba(0, 0, 0, 0.7);
+    --spinner-color: #fff;
+  }
