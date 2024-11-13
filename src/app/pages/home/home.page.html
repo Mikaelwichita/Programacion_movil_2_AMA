@@ -21,8 +21,10 @@
   </ion-header>
 
   <ion-searchbar [(ngModel)]="city" (ionInput)="getWeather()" placeholder="Buscar ciudad"></ion-searchbar>
-  <ion-button expand="block" (click)="getWeatherByLocation()">Usar mi ubicación actual</ion-button>
-
+  <ion-button expand="block" (click)="getWeatherByLocation()" class="yellow-button">
+    Usar mi ubicación actual
+  </ion-button>
+  
   <div *ngIf="weatherData" class="weather-info">
     <h2>Clima en {{ weatherData.name }}</h2>
     <p><strong>Temperatura:</strong> {{ weatherData.main.temp }} °C</p>
@@ -75,5 +77,6 @@
       
       <ion-button expand="block" (click)="startTrip()" class="start-trip-button">Iniciar Viaje</ion-button>
     </ion-card-content>
+
   </ion-card>
 </ion-content>

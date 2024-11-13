@@ -1,35 +1,40 @@
+.cuenta-card {
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
 .cuenta-container {
-    text-align: center;
-  }
-  
-  .profile-picture-container {
-    margin-bottom: 20px;
-  }
-  
-  .profile-picture {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .action-buttons {
-    margin-top: 10px;
-    --background: #f9b801;
-    color: black;
-    border-color: #f9b801;
+  text-align: center;
+}
 
-  }
-  
-  .confirm-button{
-    --background: #f9b801;
-    --border-radius: 20px;
-    color: black;
-  }
+.profile-picture-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  ion-item {
-    --background: #f0f0f0; 
-    border-radius: 12px; 
-    margin-bottom: 10px; 
-  }
-  
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.action-buttons {
+  margin-top: 10px;
+  --background: #f9b801;
+  color: black;
+  border-color: #f9b801;
+}
+
+.confirm-button {
+  --background: #f9b801;
+  --border-radius: 20px;
+  color: black;
+}
+
+ion-item {
+  --background: #f0f0f0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}

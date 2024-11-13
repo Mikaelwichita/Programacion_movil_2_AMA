@@ -1,43 +1,48 @@
 <ion-app>
   <ion-menu menuId="main-menu" contentId="main">
     <ion-content>
-      <div class="menu-header-bg"></div>
-      <div class="header-content">
-        <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" />
-        <ion-label>
-          <h2>{{ nombreUsuario || 'Usuario' }}</h2>
-          <p>{{ carreraUsuario || 'Carrera no asignada' }}</p> 
-        </ion-label>
-      </div>
-      <ion-list>
-        <ion-item routerLink="/home">
-          <ion-icon slot="start" name="home"></ion-icon>
-          <ion-label>Inicio</ion-label>
-        </ion-item>
-        <ion-item routerLink="/cuenta">
-          <ion-icon slot="start" name="person-circle"></ion-icon>
-          <ion-label>Cuenta</ion-label>
-        </ion-item>
-        <ion-item routerLink="/historial">
-          <ion-icon slot="start" name="time"></ion-icon>
-          <ion-label>Historial de Viajes</ion-label>
-        </ion-item>
-        <ion-item routerLink="/pago">
-          <ion-icon slot="start" name="card"></ion-icon>
-          <ion-label>Método de Pago</ion-label>
-        </ion-item>
-        <ion-item routerLink="/config">
-          <ion-icon slot="start" name="settings"></ion-icon>
-          <ion-label>Configuración</ion-label>
-        </ion-item>
-        <ion-item (click)="confirmLogout()">
-          <ion-icon slot="start" name="log-out"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
-        </ion-item>
-      </ion-list>
-      <div class="menu-footer-bg">
-        <div class="footer-content">
-          <img src="/assets/IMG/FUNDACION_DIJEI.png" alt="">
+      <div class="menu-border">
+        <div class="menu-header-bg"></div>
+        <div class="header-content">
+          <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" />
+          <ion-label>
+            <h2>{{ nombreUsuario || 'Usuario' }}</h2>
+            <p>{{ carreraUsuario || 'Carrera no asignada' }}</p> 
+          </ion-label>
+        </div>
+        <ion-list>
+          <ion-item routerLink="/home">
+            <ion-icon slot="start" name="home"></ion-icon>
+            <ion-label>Inicio</ion-label>
+          </ion-item>
+          <ion-item routerLink="/cuenta">
+            <ion-icon slot="start" name="person-circle"></ion-icon>
+            <ion-label>Cuenta</ion-label>
+          </ion-item>
+          <ion-item routerLink="/historial">
+            <ion-icon slot="start" name="time"></ion-icon>
+            <ion-label>Historial de Viajes</ion-label>
+          </ion-item>
+          <ion-item routerLink="/pago">
+            <ion-icon slot="start" name="card"></ion-icon>
+            <ion-label>Método de Pago</ion-label>
+          </ion-item>
+          <ion-item routerLink="/config">
+            <ion-icon slot="start" name="settings"></ion-icon>
+            <ion-label>Configuración</ion-label>
+          </ion-item>
+          <ion-item (click)="confirmLogout()">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>Cerrar Sesión</ion-label>
+          </ion-item>
+        </ion-list>
+        <div class="menu-footer-bg">
+          <div class="footer-content">
+            <img src="/assets/IMG/FUNDACION_DIJEI.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="/assets/IMG/BANNER_DESCUENTOS.png" alt="">
         </div>
       </div>
     </ion-content>

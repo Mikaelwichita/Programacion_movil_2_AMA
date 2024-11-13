@@ -8,42 +8,51 @@
 </ion-header>
 
 <ion-content>
-  <div class="cuenta-container ion-padding">
-    <div class="profile-picture-container">
-      <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" class="profile-picture" />
-      <br>
-      <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden #fileInput />
-      <ion-button fill="outline" class="action-buttons" (click)="fileInput.click()">Cambiar foto de perfil</ion-button>
-    </div>
-    <div class="form-section">
-      <ion-item>
-        <ion-label position="floating">Nombre y Apellido</ion-label>
-        <ion-input type="text" [(ngModel)]="nombreApellido" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Número de Celular</ion-label>
-        <ion-input type="tel" [(ngModel)]="telefono" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Edad</ion-label>
-        <ion-input type="number" [(ngModel)]="edad" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Carrera</ion-label>
-        <ion-input type="text" [(ngModel)]="carrera" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password" required></ion-input>
-      </ion-item>
-
-      <div class="action-buttons ion-padding">
-        <ion-button fill="solid" class="confirm-button" (click)="confirmarCambios()">Hacer Cambios</ion-button>
+  <ion-card class="cuenta-card">
+    <ion-card-header>
+      <div class="profile-picture-container">
+        <img [src]="fotoPerfil || '/assets/IMG/SIN_FOTO_PERFIL.png'" alt="Foto de perfil" class="profile-picture" />
+        <br>
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden #fileInput />
+        <ion-button fill="outline" class="action-buttons" (click)="fileInput.click()">Cambiar foto de perfil</ion-button>
       </div>
-    </div>
-  </div>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="cuenta-container ion-padding">
+        <div class="form-section">
+          <ion-item>
+            <ion-label position="floating">Nombre y Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="nombreApellido" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Número de Celular</ion-label>
+            <ion-input type="tel" [(ngModel)]="telefono" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input type="number" [(ngModel)]="edad" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Carrera</ion-label>
+            <ion-input type="text" [(ngModel)]="carrera" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="password" required></ion-input>
+          </ion-item>
+
+          <div class="action-buttons ion-padding">
+            <ion-button fill="solid" class="confirm-button" (click)="confirmarCambios()">Hacer Cambios</ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+
