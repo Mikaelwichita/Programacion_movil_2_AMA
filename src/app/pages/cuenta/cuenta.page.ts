@@ -93,6 +93,9 @@ export class CuentaPage implements OnInit {
                 await this.storage.set('usuarios', usuarios);
                 await this.storage.set('usuarioSesion', usuarios[usuarioIndex]);
 
+                // Emitir el evento para notificar los cambios
+                window.dispatchEvent(new CustomEvent('usuarioSesionActualizada'));
+
                 await this.presentAlert('Cambios guardados', 'Tus datos han sido actualizados correctamente.');
                 this.router.navigate(['/home']);
               } else {
