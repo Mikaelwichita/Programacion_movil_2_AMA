@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, AlertController } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Storage } from '@ionic/storage-angular';  // Importamos Storage
+import { Storage } from '@ionic/storage-angular';  
 
 @Component({
   selector: 'app-root',
@@ -11,14 +11,14 @@ import { Storage } from '@ionic/storage-angular';  // Importamos Storage
 })
 export class AppComponent implements OnInit {
   nombreUsuario: string = '';
-  carreraUsuario: string = '';  // Cambiamos de rolUsuario a carreraUsuario
-  fotoPerfil: string | null = null; // Añadido para almacenar la foto de perfil
+  carreraUsuario: string = '';  
+  fotoPerfil: string | null = null; 
 
   constructor(
     private menu: MenuController,
     private router: Router,
     private alertController: AlertController,
-    private storage: Storage  // Inyectamos Storage
+    private storage: Storage  
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -26,30 +26,36 @@ export class AppComponent implements OnInit {
         this.menu.close();
       });
 
-    // Inicializamos el Storage
+    
     this.initStorage();
   }
 
-  // Método para inicializar el Storage
+  
   async initStorage() {
     await this.storage.create();
   }
 
   async ngOnInit() {
-    await this.loadUserData();  // Cargar los datos del usuario al iniciar la app
+    // Cargar los datos iniciales del usuario
+    await this.loadUserData();
+
+    // Escuchar cambios en los datos del usuario
+    window.addEventListener('usuarioSesionActualizada', async () => {
+      await this.loadUserData();
+    });
   }
 
   async loadUserData() {
-    const usuarioSesion = await this.storage.get('usuarioSesion');  // Recupera el usuario actual desde Storage
+    const usuarioSesion = await this.storage.get('usuarioSesion');  
     
     if (usuarioSesion) {
-      this.nombreUsuario = usuarioSesion.nombreApellido;  // Asigna el nombre
-      this.carreraUsuario = usuarioSesion.carrera || 'Carrera no asignada';  // Asigna la carrera del usuario
-      this.fotoPerfil = usuarioSesion.fotoPerfil || null;  // Carga la foto de perfil
+      this.nombreUsuario = usuarioSesion.nombreApellido;  
+      this.carreraUsuario = usuarioSesion.carrera || 'Carrera no asignada';  
+      this.fotoPerfil = usuarioSesion.fotoPerfil || null;  
     }
   }
 
-  // Método para mostrar la alerta de confirmación de cierre de sesión
+  
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Confirmación',
@@ -74,16 +80,14 @@ export class AppComponent implements OnInit {
     await alert.present();
   }
 
-  // Método para cerrar sesión y redirigir a la página de login
   async logout() {
-    // Eliminar los datos del usuario de la sesión
+   
     await this.storage.remove('usuarioSesion');
-    this.nombreUsuario = '';  // Borra el nombre del usuario
-    this.carreraUsuario = '';  // Borra la carrera del usuario
-    this.fotoPerfil = null; // Borra la foto de perfil
+    this.nombreUsuario = '';  
+    this.carreraUsuario = '';  
+    this.fotoPerfil = null; 
 
-    // Redirige al login
     this.router.navigate(['/login']);
-    this.menu.close();  // Cierra el menú si está abierto
+    this.menu.close();  
   }
 }

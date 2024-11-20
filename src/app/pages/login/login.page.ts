@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';  // Importa Storage
-import { LoadingController, ToastController } from '@ionic/angular';  // Importa ToastController
+import { Storage } from '@ionic/storage-angular';  
+import { LoadingController, ToastController } from '@ionic/angular';  
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private storage: Storage,
-    private loadingController: LoadingController,  // Inyecta LoadingController
-    private toastController: ToastController       // Inyecta ToastController
+    private loadingController: LoadingController,  
+    private toastController: ToastController       
   ) {}
 
   ngOnInit() {
@@ -57,6 +57,9 @@ export class LoginPage implements OnInit {
           password: usuarioEncontrado.password
         });
 
+        // Emitir el evento para actualizar los datos en app.component.ts
+        window.dispatchEvent(new CustomEvent('usuarioSesionActualizada'));
+
         await loading.dismiss();
         this.router.navigate(['/home']);
       } else {
@@ -72,9 +75,9 @@ export class LoginPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000, // Duración del toast
-      position: 'top', // Posición del toast
-      color: 'danger'  // Color de alerta en caso de error
+      duration: 2000, 
+      position: 'top', 
+      color: 'danger'  
     });
     await toast.present();
   }
