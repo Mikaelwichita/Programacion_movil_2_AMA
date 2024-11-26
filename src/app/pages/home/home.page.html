@@ -8,17 +8,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button (click)="navigateTo('inicio')">Inicio</ion-button>
-        <ion-button (click)="navigateTo('cuenta')">Cuenta</ion-button>
-        <ion-button (click)="navigateTo('historial')">Historial de viajes</ion-button>
-        <ion-button (click)="navigateTo('pago')">Método de pago</ion-button>
-        <ion-button (click)="navigateTo('config')">Ajustes</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
 
   <ion-searchbar [(ngModel)]="city" (ionInput)="getWeather()" placeholder="Buscar ciudad"></ion-searchbar>
   <ion-button expand="block" (click)="getWeatherByLocation()" class="yellow-button">
@@ -40,6 +29,16 @@
     <p>No se encontraron datos del clima. Intenta buscar una ciudad válida.</p>
   </div>
 
+  <!-- MAPBOX CON CARD-->
+  <ion-card class="map-card">
+    <ion-card-header>
+      <ion-card-title>Mapa del trayecto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="map" class="map-container"></div>
+    </ion-card-content>
+  </ion-card>
+
   <!-- Sección de Iniciar Viaje -->
   <ion-card class="trip-card">
     <ion-card-header>
@@ -47,6 +46,19 @@
     </ion-card-header>
 
     <ion-card-content>
+
+      
+
+      <ion-item>
+        <ion-label position="stacked">Punto de Partida</ion-label>
+        <ion-input placeholder="Ingrese dirección de inicio" [(ngModel)]="startPoint" class="input-field"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Punto Final</ion-label>
+        <ion-input placeholder="Ingrese dirección final" [(ngModel)]="endPoint" class="input-field"></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-label position="stacked">Rol</ion-label>
         <ion-select [(ngModel)]="role" (ionChange)="onRoleChange()">
@@ -61,20 +73,11 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Punto de Partida</ion-label>
-        <ion-input placeholder="Ingrese dirección de inicio" [(ngModel)]="startPoint" class="input-field"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Punto Final</ion-label>
-        <ion-input placeholder="Ingrese dirección final" [(ngModel)]="endPoint" class="input-field"></ion-input>
-      </ion-item>
-
-      <ion-item>
         <ion-label position="stacked">Precio Estimado</ion-label>
         <ion-input [value]="tripCost | currency:'CLP':'symbol':'1.0-0'" readonly class="input-field"></ion-input>
       </ion-item>
       
+      <ion-button expand="block" (click)="updateMarkers()" class="start-trip-button">Actualizar marcadores</ion-button>
       <ion-button expand="block" (click)="startTrip()" class="start-trip-button">Iniciar Viaje</ion-button>
     </ion-card-content>
 
