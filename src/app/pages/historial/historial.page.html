@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-button slot="start" (click)="menu.toggle()" fill="clear">
-      <ion-icon name="menu" slot="icon-only"></ion-icon> <!-- Icono de hamburguesa -->
+      <ion-icon name="menu" slot="icon-only"></ion-icon>
     </ion-button>
-    <ion-title>Historial</ion-title>
+    <ion-title>Historial de Viajes</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,21 @@
       <ion-title size="large">Historial de Viajes</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="contenedor-aviso">
-    <h2>UPSS, AÚN NO HAS REALIZADO NINGUN VIAJE</h2>
+
+  <ion-list *ngIf="trips.length > 0">
+    <ion-card *ngFor="let trip of trips">
+      <ion-card-header>
+        <ion-card-title>{{ trip.startPoint }} → {{ trip.endPoint }}</ion-card-title>
+        <ion-card-subtitle>{{ trip.date | date: 'short' }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Rol:</strong> {{ trip.role | titlecase }}</p>
+        <p><strong>Costo:</strong> {{ trip.tripCost | currency:'CLP':'symbol' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <div *ngIf="trips.length === 0" class="contenedor-aviso">
+    <h2>UPSS, AÚN NO HAS REALIZADO NINGÚN VIAJE</h2>
   </div>
 </ion-content>

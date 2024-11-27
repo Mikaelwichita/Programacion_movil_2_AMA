@@ -7,6 +7,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'; // Asegúrate de importar HttpClientModule en app.module.ts
+import { TripHistoryService } from 'src/app/services/trip-history.service';
+
 
 
 @Component({
@@ -28,6 +30,7 @@ export class HomePage implements AfterViewInit{
   readonly conversionRate = 900;
 
   constructor(
+    private tripHistoryService: TripHistoryService,
     private http: HttpClient,
     private weatherService: WeatherService,
     private router: Router,
@@ -179,7 +182,8 @@ export class HomePage implements AfterViewInit{
       await alert.present();
       return;
     }
-    // Verificar si los puntos de partida y destino tienen coordenadas válidas
+  
+    // Verificar marcadores
     if (!this.startMarker || !this.endMarker) {
       const alert = await this.alertController.create({
         header: 'Error',
@@ -190,16 +194,28 @@ export class HomePage implements AfterViewInit{
       return;
     }
   
-    await this.loadingService.showLoading(); 
+    await this.loadingService.showLoading();
   
     setTimeout(async () => {
-      await this.loadingService.hideLoading(); 
+      await this.loadingService.hideLoading();
+  
+      // Guardar el viaje en el historial
+      this.tripHistoryService.addTrip({
+        startPoint: this.startPoint,
+        endPoint: this.endPoint,
+        role: this.role,
+        tripCost: this.tripCost!,
+        date: new Date(),
+      });
   
       const alert = await this.alertController.create({
         header: 'Viaje Iniciado',
-        message: `Tu viaje de ${this.startPoint} a ${this.endPoint} ha comenzado. Precio estimado: $${this.tripCost} CLP.`,
+        message: `Tu viaje de ${this.startPoint} a ${this.endPoint} ha sido registrado. Precio estimado: $${this.tripCost} CLP.`,
         buttons: ['OK'],
       });
       await alert.present();
-    }, 2000); 
-  } }
+  
+      // Opcional: Navegar a otra página después de iniciar el viaje
+    }, 2000);
+  }
+  } 
