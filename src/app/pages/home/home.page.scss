@@ -111,13 +111,13 @@ ion-select {
 }
 
 .map-container {
-  width: 100%; /* Ajusta al ancho completo del contenedor */
-  height: 300px; /* Altura fija o ajustable */
+  width: 100%; 
+  height: 300px; 
   position: relative;
 }
 
 .mapboxgl-marker {
-  position: absolute !important;  /* Cambiar fixed a absolute */
+  position: absolute !important;  
   z-index: 9999;
 }
 

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';  // Importa LoadingController
+import { AlertController, LoadingController } from '@ionic/angular';  
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { Location } from '@angular/common';  
 
 interface Usuario {
   nombreApellido: string;
@@ -26,10 +27,11 @@ export class RegistroPage {
   password: string = '';
 
   constructor(
-    private alertController: AlertController, 
+    private alertController: AlertController,
     private router: Router,
     private storage: Storage,
-    private loadingController: LoadingController  // Inyecta LoadingController
+    private loadingController: LoadingController,
+    private location: Location 
   ) {}
 
   async registrarse() {
@@ -47,7 +49,7 @@ export class RegistroPage {
       });
       await loading.present();
 
-      const usuarios: Usuario[] = await this.storage.get('usuarios') || [];
+      const usuarios: Usuario[] = (await this.storage.get('usuarios')) || [];
       const usuarioExistente = usuarios.find(u => u.correo === this.correo);
 
       if (usuarioExistente) {
@@ -93,5 +95,9 @@ export class RegistroPage {
     });
 
     await alert.present();
+  }
+
+  volverAtras() {
+    this.location.back(); 
   }
 }

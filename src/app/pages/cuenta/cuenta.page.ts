@@ -18,7 +18,7 @@ export class CuentaPage implements OnInit {
   password: string = ''; 
   fotoPerfil: string | null = null;
 
-  // Variables para almacenar datos originales
+ 
   originalData: any = {};
 
   constructor(
@@ -43,7 +43,7 @@ export class CuentaPage implements OnInit {
       this.password = usuarioSesion.password || ''; 
       this.fotoPerfil = usuarioSesion.fotoPerfil || null;
 
-      // Guardamos los datos originales para detectar cambios
+     
       this.originalData = { ...usuarioSesion };
     }
   }

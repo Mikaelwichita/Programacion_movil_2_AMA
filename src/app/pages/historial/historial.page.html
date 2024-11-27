@@ -15,7 +15,7 @@
   </ion-header>
 
   <ion-list *ngIf="trips.length > 0">
-    <ion-card *ngFor="let trip of trips">
+    <ion-card class="card-custom" *ngFor="let trip of trips">
       <ion-card-header>
         <ion-card-title>{{ trip.startPoint }} → {{ trip.endPoint }}</ion-card-title>
         <ion-card-subtitle>{{ trip.date | date: 'short' }}</ion-card-subtitle>

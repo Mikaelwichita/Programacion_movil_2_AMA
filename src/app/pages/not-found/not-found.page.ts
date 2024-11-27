@@ -11,6 +11,6 @@ export class NotFoundPage {
   constructor(private router: Router) {}
 
   goHome() {
-    this.router.navigate(['/home']);  // Redirige al inicio
+    this.router.navigate(['/home']);  
   }
 }

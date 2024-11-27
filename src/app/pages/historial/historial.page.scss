@@ -1,7 +1,33 @@
 .contenedor-aviso {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: center; 
+    align-items: center; 
     text-align: center;
     height: 100%;
-    padding-top: 20px; 
-}
+    padding: 20px; 
+  }
+  
+  .card-custom {
+    border: 2px solid #ffd700; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    margin: 16px; 
+    background-color: #fff; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card-custom:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .card-custom ion-card-title, 
+  .card-custom ion-card-subtitle {
+    color: #333; 
+  }
+  
+  .card-custom p {
+    font-size: 1rem;
+    color: #666; 
+  }
+  

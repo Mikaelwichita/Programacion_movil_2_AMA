@@ -37,10 +37,10 @@ export class ConfigPage {
   toggleNotifications() {
     if (this.notificationsEnabled) {
       console.log('Notificaciones activadas');
-      // Lógica adicional para activar notificaciones
+      
     } else {
       console.log('Notificaciones desactivadas');
-      // Lógica adicional para desactivar notificaciones
+      
     }
   }
 }

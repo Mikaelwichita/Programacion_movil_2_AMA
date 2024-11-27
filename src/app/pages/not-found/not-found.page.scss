@@ -10,8 +10,8 @@
   
   .error-container {
     width: 100%;
-    max-width: 600px; // Ajusta según tu preferencia para pantallas grandes
-    padding: 40px; // Incrementa el padding para que se vea más grande
+    max-width: 600px; 
+    padding: 40px; 
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -19,30 +19,30 @@
   }
   
   .error-code {
-    font-size: 8rem; // Incrementa el tamaño para una apariencia más impactante
+    font-size: 8rem; 
     color: #ff4757;
     font-weight: 900;
     margin: 0;
   }
   
   .error-message {
-    font-size: 2rem; // Aumenta el tamaño del mensaje de error
+    font-size: 2rem; 
     color: #2f3542;
     margin-top: 10px;
   }
   
   .error-description {
-    font-size: 1.2rem; // Incrementa ligeramente el tamaño
+    font-size: 1.2rem; 
     color: #57606f;
     margin-top: 5px;
     margin-bottom: 20px;
-    padding: 0 10px; // Añade un padding horizontal para mejor legibilidad en pantallas pequeñas
+    padding: 0 10px; 
   }
   
   ion-button {
-    --background: #1e90ff;
+    --background: #f1f50b;
     --border-radius: 5px;
-    width: 100%; // Hace que el botón ocupe toda la anchura del contenedor
-    max-width: 300px; // Establece un ancho máximo para evitar que se expanda demasiado en pantallas grandes
-    margin-top: 20px; // Añade un margen superior para separar del contenido
+    width: 100%; 
+    max-width: 300px; 
+    margin-top: 20px; 
   }

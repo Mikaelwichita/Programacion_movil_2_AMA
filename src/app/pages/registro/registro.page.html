@@ -1,41 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="back-button" (click)="volverAtras()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <div class="bienvenida-container">
     <h1>¡Bienvenido nuevo usuario!</h1>
     <p>Regístrate con tus datos para poder comenzar una nueva experiencia en nuestra aplicación.</p>
   </div>
   <div class="registro-container ion-padding">
-
     <div class="form-section">
       <ion-item>
         <ion-label position="floating">Nombre y Apellido <span style="color: red;">*</span></ion-label>
         <ion-input type="text" [(ngModel)]="nombreApellido" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Correo Electrónico <span style="color: red;">*</span></ion-label>
         <ion-input type="email" [(ngModel)]="correo" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Número de Celular <span style="color: red;">*</span></ion-label>
         <ion-input type="tel" [(ngModel)]="telefono" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Edad <span style="color: red;">*</span></ion-label>
         <ion-input type="number" [(ngModel)]="edad" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Profesión <span style="color: red;">*</span></ion-label>
         <ion-input type="text" [(ngModel)]="carrera" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Contraseña <span style="color: red;">*</span></ion-label>
         <ion-input type="password" [(ngModel)]="password" required></ion-input>
       </ion-item>
-
       <div class="action-buttons ion-padding">
         <ion-button fill="outline" class="action-buttons" (click)="registrarse()">Registrarse</ion-button>
       </div>

@@ -6,7 +6,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Component, AfterViewInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http'; // Asegúrate de importar HttpClientModule en app.module.ts
+import { HttpClient } from '@angular/common/http'; 
 import { TripHistoryService } from 'src/app/services/trip-history.service';
 
 
@@ -48,8 +48,8 @@ export class HomePage implements AfterViewInit{
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-70.6506, -33.4372], // Centrar en Plaza de Armas
-      zoom: 12, // Ajustar nivel de zoom para Santiago
+      center: [-70.6506, -33.4372], 
+      zoom: 12, 
       accessToken: environment.mapboxApiKey,
     });
   
@@ -57,11 +57,11 @@ export class HomePage implements AfterViewInit{
   }
   
   setPoint(lat: number, lng: number, isStart: boolean) {
-    const coords: [number, number] = [lng, lat]; // [Longitud, Latitud]
+    const coords: [number, number] = [lng, lat]; 
     
     const marker = new mapboxgl.Marker({ color: isStart ? 'green' : 'red', draggable: false })
       .setLngLat(coords)
-      .setPopup(new mapboxgl.Popup().setHTML(isStart ? "Punto de partida" : "Punto de llegada")) // O cualquier mensaje
+      .setPopup(new mapboxgl.Popup().setHTML(isStart ? "Punto de partida" : "Punto de llegada")) 
       .addTo(this.map); // Fija el marcador al mapa
   
     if (isStart) {
@@ -88,14 +88,13 @@ export class HomePage implements AfterViewInit{
       const endCoords = await this.getCoordinates(this.endPoint);
   
       if (startCoords && endCoords) {
-        this.setPoint(startCoords[1], startCoords[0], true); // [lat, lng]
-        this.setPoint(endCoords[1], endCoords[0], false);   // [lat, lng]
+        this.setPoint(startCoords[1], startCoords[0], true); 
+        this.setPoint(endCoords[1], endCoords[0], false);   
   
-        // Ajusta la vista del mapa para que ambos puntos sean visibles
         const bounds = new mapboxgl.LngLatBounds();
         bounds.extend(startCoords); // Agrega el inicio
         bounds.extend(endCoords);   // Agrega el final
-        this.map.fitBounds(bounds, { padding: 50 }); // Ajusta el zoom con un padding
+        this.map.fitBounds(bounds, { padding: 50 }); 
       }
     } catch (error) {
       console.error('Error al actualizar los marcadores:', error);
@@ -183,7 +182,7 @@ export class HomePage implements AfterViewInit{
       return;
     }
   
-    // Verificar marcadores
+   
     if (!this.startMarker || !this.endMarker) {
       const alert = await this.alertController.create({
         header: 'Error',
@@ -215,7 +214,6 @@ export class HomePage implements AfterViewInit{
       });
       await alert.present();
   
-      // Opcional: Navegar a otra página después de iniciar el viaje
     }, 2000);
   }
   } 
