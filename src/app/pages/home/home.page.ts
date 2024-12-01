@@ -28,6 +28,18 @@ export class HomePage implements AfterViewInit{
   endPoint: string = '';
   tripCost: number | null = null;
   readonly conversionRate = 900;
+  duocSedes = [
+    { nombre: 'Duoc UC - Sede Plaza Oeste', lat: -33.50742, lng: -70.72646 },
+    { nombre: 'Duoc UC - Sede Maipú', lat: -33.51333, lng: -70.75444 },
+    { nombre: 'Duoc UC - Sede San Joaquín', lat: -33.50158, lng: -70.61539 },
+    { nombre: 'Duoc UC - Sede Puente Alto', lat: -33.60867, lng: -70.57966 },
+    { nombre: 'Duoc UC - Sede Antonio Varas', lat: -33.42628, lng: -70.62697 },
+    { nombre: 'Duoc UC - Sede Alameda', lat: -33.45729, lng: -70.64891 },
+    { nombre: 'Duoc UC - Sede Ñuñoa', lat: -33.46342, lng: -70.60972 },
+    { nombre: 'Duoc UC - Sede Macul', lat: -33.47512, lng: -70.60450 },
+    { nombre: 'Duoc UC - Sede San Carlos de Apoquindo', lat: -33.41981, lng: -70.58992 },
+];
+  
 
   constructor(
     private tripHistoryService: TripHistoryService,
@@ -42,7 +54,16 @@ export class HomePage implements AfterViewInit{
     this.initializeMap();
   }
 
+  selectedStartPoint: any = null;
 
+  onStartPointChange(event: any) {
+    const selectedSede = event.detail.value;
+    if (selectedSede) {
+      this.startPoint = selectedSede.nombre; // Actualiza el nombre del punto de partida
+      this.setPoint(selectedSede.lat, selectedSede.lng, true); // Marca la sede en el mapa
+      this.map.flyTo({ center: [selectedSede.lng, selectedSede.lat], zoom: 15 }); // Mueve el mapa hacia la sede
+    }
+  }
   
   initializeMap() {
     this.map = new mapboxgl.Map({

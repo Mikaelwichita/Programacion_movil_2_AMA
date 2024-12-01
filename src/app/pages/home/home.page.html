@@ -12,6 +12,7 @@
   <ion-searchbar [(ngModel)]="city" (ionInput)="getWeather()" placeholder="Buscar ciudad"></ion-searchbar>
   <ion-button expand="block" (click)="getWeatherByLocation()" class="yellow-button">
     Usar mi ubicación actual
+
   </ion-button>
   
   <div *ngIf="weatherData" class="weather-info">
@@ -46,9 +47,12 @@
     <ion-card-content>
 
       <ion-item>
-        <ion-label position="stacked">Punto de Partida</ion-label>
-        <ion-input placeholder="Ingrese dirección de inicio" [(ngModel)]="startPoint" class="input-field"></ion-input>
-      </ion-item>
+  <ion-label position="stacked">Punto de Partida</ion-label>
+  <ion-select placeholder="Seleccione una sede" [(ngModel)]="selectedStartPoint" (ionChange)="onStartPointChange($event)">
+    <ion-select-option *ngFor="let sede of duocSedes" [value]="sede">{{ sede.nombre }}</ion-select-option>
+  </ion-select>
+</ion-item>
+
 
       <ion-item>
         <ion-label position="stacked">Punto Final</ion-label>
