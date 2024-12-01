@@ -40,9 +40,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
   {
+    path: 'password-recovery',
+    loadChildren: () => import('./pages/password-recovery/password-recovery.module').then(m => m.PasswordRecoveryPageModule)
+  },  
+  {
     path: '**', // Ruta comodín para URLs no encontradas
     redirectTo: 'not-found'
-  }
+  },
 
 ];
 

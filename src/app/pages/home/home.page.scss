@@ -1,131 +1,110 @@
 .weather-info {
-    padding: 16px;
-    text-align: center;
-  }
+  padding: 16px;
+  text-align: center;
+}
 
-  .weather-info h2 {
-    margin: 0;
-    font-size: 24px;
-  }
+.weather-info h2 {
+  margin: 0;
+  font-size: 24px;
+}
 
-  .weather-info p {
-    margin: 4px 0;
-  }
+.weather-info p {
+  margin: 4px 0;
+}
 
-  img {
-    margin-top: 10px;
-    width: 100px; 
-  }
+img {
+  margin-top: 10px;
+  width: 100px;
+}
 
-  .custom-header {
-    background-color: #f9b801;
-  }
+.custom-header {
+  background-color: #f9b801;
+}
 
-  .weather-info {
-    background-color: #f0e68c; 
-    border-radius: 15px; 
-    padding: 20px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    max-width: 400px; 
-    margin: 20px auto; 
-    text-align: center; 
-    border-color: black;
-  }
-
+.weather-info {
+  background-color: #f0e68c;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  border-color: black;
+}
 
 .trip-card {
-  border: 2px solid black; 
+  border: 2px solid black;
   border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-  padding: 16px; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
-
 
 .trip-card ion-item {
-  --background: #f0f0f0; 
-  border: 1px solid black; 
-  border-radius: 8px; 
-  margin-bottom: 12px; 
+  --background: #f0f0f0;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
-
 
 .start-trip-button {
-  --background: #ffd700; 
-  --color: black; 
+  --background: #ffd700;
+  --color: black;
   font-weight: bold;
   border-radius: 6px;
-  margin-top: 12px; 
+  margin-top: 12px;
 }
 
-
 ion-item {
-  --background: transparent; 
-  --inner-padding-end: 0; 
+  --background: transparent;
+  --inner-padding-end: 0;
 }
 
 ion-label {
-  margin-top: 12px; 
-  margin-bottom: 4px; 
-  font-size: 1rem; 
-  color: #333; 
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  color: #333;
 }
 
 ion-input,
 ion-select {
-  --padding-top: 12px; 
+  --padding-top: 12px;
   --padding-bottom: 12px;
-  background-color: #f2f2f2; 
-  border-radius: 5px; 
-  margin-top: 8px; 
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-top: 8px;
 }
 
-
 .input-field {
-  margin-bottom: 12px; 
+  margin-bottom: 12px;
 }
 
 .yellow-button {
-  --background: #ffd700; 
-  --color: black; 
+  --background: #ffd700;
+  --color: black;
   font-weight: bold;
   border-radius: 6px;
-  margin-top: 12px; 
+  margin-top: 12px;
 }
 
 .map-card {
   margin: 16px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0; /* Asegura que no haya padding adicional */
+}
 
-  .map-container {
-    height: 300px;
-    border-radius: 8px;
-  }
+.map-container {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .action-buttons {
   margin: 16px;
-
-  ion-button {
-    margin-bottom: 10px;
-  }
-}
-
-.map-container {
-  width: 100%; 
-  height: 300px; 
-  position: relative;
 }
 
 .mapboxgl-marker {
-  position: absolute !important;  
-  z-index: 9999;
+  z-index: 9999; /* Mantén este z-index para asegurar que los marcadores estén sobre el mapa */
 }
-
-
-
-
-
-
-
-  
-  

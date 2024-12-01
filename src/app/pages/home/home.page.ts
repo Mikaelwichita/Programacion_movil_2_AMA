@@ -75,7 +75,18 @@ export class HomePage implements AfterViewInit{
     });
   
     this.map.addControl(new mapboxgl.NavigationControl());
+  
+    // Listener para mantener los marcadores fijos al hacer zoom
+    this.map.on('zoom', () => {
+      if (this.startMarker) {
+        this.startMarker.setLngLat(this.startMarker.getLngLat());
+      }
+      if (this.endMarker) {
+        this.endMarker.setLngLat(this.endMarker.getLngLat());
+      }
+    });
   }
+  
   
   setPoint(lat: number, lng: number, isStart: boolean) {
     const coords: [number, number] = [lng, lat]; 
