@@ -98,14 +98,15 @@ export class HomePage implements AfterViewInit{
     type: "Polygon",
     coordinates: [
       [
-        [-71.3026, -33.7886], // Punto noroeste
-        [-70.3484, -33.7886], // Punto noreste
-        [-70.3484, -34.2486], // Punto sureste
-        [-71.3026, -34.2486], // Punto suroeste
-        [-71.3026, -33.7886], // Cerramos el polígono
+        [-71.4, -33.5],  // Punto suroeste (menor longitud, mayor latitud)
+        [-70.5, -33.5],  // Punto sureste (mayor longitud, mayor latitud)
+        [-70.5, -34.3],  // Punto noreste (mayor longitud, menor latitud)
+        [-71.4, -34.3],  // Punto noroeste (menor longitud, menor latitud)
+        [-71.4, -33.5],  // Cerramos el polígono
       ],
     ],
   };
+  
   
   
   setPoint(lat: number, lng: number, isStart: boolean) {
