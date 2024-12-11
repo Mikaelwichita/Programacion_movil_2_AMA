@@ -31,7 +31,7 @@ export class PasswordRecoveryPage {
       });
       await loading.present();  
 
-      // Verificar si el email existe
+      
       const usuarios: any[] = (await this.storage.get('usuarios')) || [];
       this.usuario = usuarios.find(u => u.correo.trim().toLowerCase() === this.email.trim().toLowerCase());
 
@@ -42,15 +42,14 @@ export class PasswordRecoveryPage {
           this.presentToast('Correo no encontrado.');
         }
         await loading.dismiss();  
-      }, 2000); // Espera de 3 segundos antes de ocultar el loading
+      }, 2000); 
     } else {
-      // Validar contraseñas
+      
       if (this.newPassword !== this.confirmPassword) {
         this.presentToast('Las contraseñas no coinciden.');
         return;
       }
 
-      // Actualizar la contraseña
       this.usuario.password = this.newPassword;
       const usuarios: any[] = (await this.storage.get('usuarios')) || [];
       const index = usuarios.findIndex(u => u.correo === this.usuario.correo);
