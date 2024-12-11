@@ -8,6 +8,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'; 
 import { TripHistoryService } from 'src/app/services/trip-history.service';
+import * as turf from "@turf/turf";
 
 
 
@@ -64,6 +65,12 @@ export class HomePage implements AfterViewInit{
       this.map.flyTo({ center: [selectedSede.lng, selectedSede.lat], zoom: 15 }); // Mueve el mapa hacia la sede
     }
   }
+
+  isPointInRegion(lat: number, lng: number): boolean {
+    const point = turf.point([lng, lat]);
+    const region = turf.polygon(this.regionMetropolitanaBounds.coordinates);
+    return turf.booleanPointInPolygon(point, region);
+  }
   
   initializeMap() {
     this.map = new mapboxgl.Map({
@@ -86,6 +93,20 @@ export class HomePage implements AfterViewInit{
       }
     });
   }
+
+  regionMetropolitanaBounds: any = {
+    type: "Polygon",
+    coordinates: [
+      [
+        [-71.3026, -33.7886], // Punto noroeste
+        [-70.3484, -33.7886], // Punto noreste
+        [-70.3484, -34.2486], // Punto sureste
+        [-71.3026, -34.2486], // Punto suroeste
+        [-71.3026, -33.7886], // Cerramos el polígono
+      ],
+    ],
+  };
+  
   
   
   setPoint(lat: number, lng: number, isStart: boolean) {
@@ -120,18 +141,31 @@ export class HomePage implements AfterViewInit{
       const endCoords = await this.getCoordinates(this.endPoint);
   
       if (startCoords && endCoords) {
+        // Validar si el punto final está en la Región Metropolitana
+        const isValid = this.isPointInRegion(endCoords[1], endCoords[0]);
+        if (!isValid) {
+          const alert = await this.alertController.create({
+            header: 'Ubicación no válida',
+            message: 'Tu ubicación final está fuera de la Región Metropolitana.',
+            buttons: ['OK'],
+          });
+          await alert.present();
+          return;
+        }
+  
         this.setPoint(startCoords[1], startCoords[0], true); 
         this.setPoint(endCoords[1], endCoords[0], false);   
   
         const bounds = new mapboxgl.LngLatBounds();
-        bounds.extend(startCoords); // Agrega el inicio
-        bounds.extend(endCoords);   // Agrega el final
-        this.map.fitBounds(bounds, { padding: 50 }); 
+        bounds.extend(startCoords); 
+        bounds.extend(endCoords);   
+        this.map.fitBounds(bounds, { padding: 50 });
       }
     } catch (error) {
       console.error('Error al actualizar los marcadores:', error);
     }
   }
+  
 
   async getCoordinates(address: string): Promise<[number, number] | null> {
     try {
