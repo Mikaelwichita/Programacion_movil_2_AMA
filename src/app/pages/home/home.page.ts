@@ -93,7 +93,7 @@ export class HomePage implements AfterViewInit{
       }
     });
   }
-
+  
   regionMetropolitanaBounds: any = {
     type: "Polygon",
     coordinates: [
@@ -106,7 +106,6 @@ export class HomePage implements AfterViewInit{
       ],
     ],
   };
-  
   
   
   setPoint(lat: number, lng: number, isStart: boolean) {
